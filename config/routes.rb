@@ -67,6 +67,12 @@ Rails.application.routes.draw do
     resources :workers, only: [:show]
   end
 
+  namespace :caseworkers do
+    resources :legal_aid_applications, only: %i[show index]
+    resources :applicants, only: :show
+    resources :proceeding_types, only: :show
+  end
+
   namespace :citizens do
     resources :legal_aid_applications, only: %i[show index]
     resources :resend_link_requests, only: %i[show update], path: 'resend_link'
