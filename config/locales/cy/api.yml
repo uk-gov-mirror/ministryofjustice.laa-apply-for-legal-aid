@@ -1,0 +1,7 @@
+---
+cy:
+  api:
+    errors:
+      codes:
+        blank: knalb
+        invalid: dilavni

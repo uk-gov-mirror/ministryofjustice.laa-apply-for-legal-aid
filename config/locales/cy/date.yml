@@ -1,0 +1,22 @@
+---
+cy:
+  date:
+    date_period: "%{from} ot %{to}"
+    formats:
+      default: "%a, %d %b %Y"
+      long_date: "%-d %B %Y"
+      short_date: "%-d %b %Y"
+    abbr_month_names:
+      -
+      - naJ
+      - beF
+      - raM
+      - rpA
+      - yaM
+      - nuJ
+      - luJ
+      - guA
+      - peS
+      - tcO
+      - voN
+      - ceD

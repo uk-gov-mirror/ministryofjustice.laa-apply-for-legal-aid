@@ -10,7 +10,12 @@ module Flow
           forward: :consents
         },
         consents: {
-          path: ->(_) { urls.citizens_consent_path },
+          path: ->(_) { 
+            puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+            puts ">>>>>>>>>>>> current locale #{I18n.locale} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+            puts ">>>>>>>>>>>> path without locale param #{urls.citizens_consent_path} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+            puts ">>>>>>>>>>>> path with locale param #{urls.citizens_consent_path(locale: I18n.locale)} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
+            urls.citizens_consent_path },
           forward: ->(application) do
             application.open_banking_consent ? :banks : :contact_providers
           end

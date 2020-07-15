@@ -13,10 +13,15 @@ module LaaApplyForLegalAid
 
     config.time_zone = 'London'
 
+    Rails.application.routes.default_url_options[:locale] = I18n.locale
+
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
       g.test_framework :rspec
     end
+
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = [:en, :cy]
 
     config.x.application.host             = ENV['HOST']
     config.x.benefit_check.service_name   = ENV['BC_LSC_SERVICE_NAME']

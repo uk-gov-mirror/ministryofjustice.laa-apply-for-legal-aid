@@ -1,0 +1,19 @@
+---
+cy:
+  forms:
+    address:
+      errors:
+        no_results: ".yllaunam sserdda eht retnE .edoctsop taht rof sesserdda yna
+          dnif ton dluoc eW"
+        unsuccessful: ".yllaunam sserdda eht retnE .edoctsop taht rof sesserdda yna
+          dnif ton dluoc eW"
+    address_lookup:
+      address_manual_link: yllaunam sserdda retnE
+      heading: sserdda ecnednopserroc s'tneilc ruoy retnE
+      label_1: edoctsop
+      postcode: edoctsoP
+      submit_button: sserdda dniF
+    address_manual:
+      heading: sserdda ecnednopserroc s'tneilc ruoy retnE
+    address_selection:
+      heading: sserdda ecnednopserroc s'tneilc ruoy retnE

@@ -1,0 +1,60 @@
+---
+cy:
+  admin:
+    legal_aid_applications:
+      index:
+        delete_all: snoitacilppa lla eteleD
+        cancel_delete: eteled lecnaC
+        heading_1: snoitacilppA diA lageL :nimdA
+        no_applications: tneserp snoitacilppa oN
+        confirm_delete: eteled ,seY
+        applicant_name: eman s'tneilC
+        application_ref: ecnerefer esaC
+        warning:
+          delete_all: "?snoitacilppa lla eteled ot tnaw uoy erus uoy erA"
+          delete_consequence: enodnu eb t'nac noitca sihT
+      legal_aid_applications:
+        warning:
+          delete: "?esac siht eteled ot tnaw uoy erus uoy erA"
+        applicant_name: eman s'tneilC
+        application_ref: ecnerefer esaC
+        created_at: detrats etaD
+        delete: eteleD
+        latest_applications: snoitacilppA diA lageL tsetaL
+        status: sutatS
+    settings:
+      show:
+        heading_1: sgnitteS
+        labels:
+          mock_true_layer_data: ataD reyaLeurT kcoM
+          allow_non_passported_route: etuor detropssap-non wollA
+          manually_review_all_cases: snoitacilppa lla weiver yllaunaM
+        hints:
+          mock_true_layer_data: "}emanelif_noitcasnart_knab{% morf atad kcom yb decalper
+            eb lliw atad reyaLeurT dna seY tceleS"
+          allow_non_passported_route: etuor detropssap-non wolla ot seY tceleS
+          manually_review_all_cases: srekrowesac ot detuor weiver launam rof dekram
+            esoht tsuj evah ot oN ,weiver rof rekrowesac ot snoitacilppa lla etuor
+            ot seY tceleS
+    submitted_applications_reports:
+      show:
+        heading_1: snoitacilppA dettimbuS
+        no_applications: tneserp snoitacilppa oN
+      submitted_applications:
+        applicant_name: eman s'tneilC
+        application_ref: ecnerefer esaC
+        ccms_ref: ecnerefer SMCC
+        provider_firm: mrif redivorP
+        provider_username: emanresu redivorP
+        submission_date: etad noissimbuS
+    feedback:
+      show:
+        heading_1: kcabdeeF
+        no_feedback: dettimbus kcabdeef oN
+      feedbacks:
+        done_eveything: "?yadot ot dedeen yeht tahw od ot elba resu eht saW"
+        satisfaction: gnitar noitcafsitaS
+        suggestion: noitseggus tnemevorpmI
+    reports:
+      index:
+        heading_1: sdaolnwod dna stroper nimdA

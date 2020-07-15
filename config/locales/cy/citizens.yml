@@ -1,0 +1,231 @@
+---
+cy:
+  citizens:
+    accounts:
+      gather:
+        retrieving_transactions: snoitcasnart knab gniveirteR
+      index:
+        account_holder_address_heading: sserdda redloh tnuoccA
+        account_holder_name_heading: eman redloh tnuoccA
+        account_number_heading: rebmuN tnuoccA
+        balance_heading: ecnalaB
+        balance_text: ".noitautis laicnanif ruoy dnatsrednu su pleh ot snoitcasnart
+          ruoy puorg ot roticilos ruoy ksa ll'eW"
+        heading_1: snoitcasnart knab ruoy derahs yllufsseccus ev'uoY
+        intro_text: ".yrotsih noitcasnart ruoy fo shtnom 3 dedaolnwod ev'eW"
+        sort_code_heading: edoC troS
+        type_heading: epyT
+        your_accounts: ")s(tnuocca ruoY"
+        link_other_account: tnuocca knab rehtona ddA
+    additional_accounts:
+      index:
+        field_set_header: "?sknab rehto htiw stnuocca evah uoy oD"
+      new:
+        field_set_header: "?sknab rehto htiw stnuocca ruoy ot ssecca enilno evah uoy
+          oD"
+    banks:
+      index:
+        title: knab ruoy tceleS
+        what_happens_next: txen sneppah tahW
+        connect: ".su htiw snoitcasnart knab ruoy erahs nac uoy os ecivres eruces
+          a gnisu knab ruoy ot uoy tcennoc ll'eW"
+      create:
+        error: knab a tceleS
+    check_answers:
+      index:
+        assets:
+          heading: stessa rehto dna sgnivas ,ytreporP
+          other_assets: stessa rehtO
+          outstanding_mortgage: tnuoma egagtrom gnidnatstuO
+          own_home: denwo ytreporP
+          percentage_home: denwo egatnecreP
+          property_value: eulav ytreporP
+          restrictions: "?stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp
+            taht snoitcirtser lagel yna ereht erA"
+          savings_and_investments: stnemtsevni dna sgnivaS
+          shared_ownership: esle enoyna htiw denwO
+        h1-heading: srewsna ruoy kcehC
+        bank-heading: stnuocca knab ruoY
+        link_other_account: tnuocca knab rehtona ddA
+        submit:
+          heading: sliated ruoy timbuS
+          text: ".tcerroc era gnidivorp era uoy sliated eht ,egdelwonk ruoy fo tseb
+            eht ot ,taht gnimrifnoc era uoy noitacilppa siht gnittimbus yB"
+      student_finance:
+        student_finance: ecnanif tnedutS
+        do_you_get: "?ecnanif tneduts teg uoy oD"
+        how_much: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum woH"
+    contact_providers:
+      show:
+        title: noitacilppa ruoy eunitnoc ot roticilos ruoy tcatnoC
+        they_will_check: ".secnanif ruoy tuoba gniksa yb dia lagel rof yfilauq uoy
+          rehtehw kcehc lliw yehT"
+    consents:
+      show:
+        title: "?AAL eht htiw noitamrofni tnuocca knab ruoy erahs ot eerga uoy oD"
+        inset_text: ".esle gnihtyna rof ti esu ton od eW .noitacilppa dia lagel ruoy
+          troppus ot noitamrofni laicnanif ruoy esu ylno eW"
+        summary_heading: "?ees ot elba eb AAL eht lliw noitamrofni tahW"
+        able_to_see:
+          heading: ":ruoy ees ot elba eb ll'eW"
+          list: |2-
+
+            ecnalab tnuocca
+            sliated noitcasnart dna stnemetats knab
+            )htrib fo etad dna eman ruoy sa hcus( sliated lanosrep
+        unable_to_see:
+          heading: ":ton lliw eW"
+          list: |2-
+
+            tnuocca knab ruoy ot ssecca gniogno yna evah
+            drowssap dna emanresu gniknab enilno ruoy evas
+    declarations:
+      show:
+        page_heading: noitaralceD
+        submit_button: timbus dna eergA
+    dependants:
+      assets_values:
+        show:
+          page_heading: "?000,8£ naht erom htrow stessa evah }eman{% seoD"
+      relationships:
+        show:
+          page_heading: "?}eman{% ot pihsnoitaler ruoy si tahW"
+    has_dependants:
+      show:
+        page_heading: "?stnadneped yna evah uoy oD"
+        info: ".troppus laicnanif rof uoy no sdneped dna uoy htiw sevil ohw tluda
+          ro dlihc a eb dluoc tnadneped A"
+        extra_info: ".eno evah uoy fi rentrap ruoy edulcni ton oD"
+    has_other_dependants:
+      show:
+        heading: "?stnadneped rehto yna evah uoy oD"
+        error: stnadneped rehto evah uoy fi sey tceleS
+    identify_types_of_incomes:
+      show:
+        page_heading: "?eviecer uoy od emocni fo sepyt hcihW"
+      update:
+        none_selected: emocni fo sepyt yna eviecer uoy fi tceleS
+    identify_types_of_outgoings:
+      show:
+        page_heading: "?ekam uoy od stnemyap raluger tahW"
+      update:
+        none_selected: stnemyap raluger yna ekam uoy fi tceleS
+    information:
+      show:
+        heading: stnuocca knab ruoy ot ssecca emit-eno eviG
+        secure_service_redirect_info: ".gniknab enilno ruoy ot ni ngis ot ecivres
+          eruces a ot uoy refsnart ll'eW"
+        what_will_need_to_be_shared: ".yenom on htiw ro seman tnioj ni yna gnidulcni
+          ,su htiw stnuocca knab ruoy fo lla erahs ot deen ll'uoY"
+        online_banking_info_heading: gniknab enilno ruoy ot tcennoc ew woH
+        data_download_info: ".shtnom 3 tsal eht gnirevoc snoitcasnart knab daolnwod
+          ew ,tnuocca ruoy ssecca ot su desirohtua dna ni dengis ev'uoy retfA"
+        banking_credentials_not_saved: ".drowssap dna emanresu gniknab enilno ruoy
+          evas ton od eW"
+    legal_aid_applications:
+      index:
+        case_reference: ":ecnerefer esaC"
+        heading_1: su htiw noitamrofni laicnanif ruoy erahS
+        name: ":emaN"
+        online_banking_details: ".sliated ni ngis gniknab enilno ruoY"
+        what_you_will_need: deen ll'uoy tahW
+        we_need_to_check: ".dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot deen
+          eW"
+        ask_you_to: ":ot uoy ksa ll'eW"
+        list: |2-
+
+          su htiw snoitcasnart knab fo shtnom 3 erahs
+          ecivres eruces a aiv gniknab enilno ruoy ot ni ngis
+        tell_us:
+          list: |2-
+
+            ekam uoy stnemyap raluger
+            eviecer uoy emocni
+        your_solicitor: ":roticilos ruoY"
+        need_to_tell_us: ":yna tuoba su llet ot deen osla ll'uoY"
+    means_test_results:
+      show:
+        page-heading: txen sneppah tahW
+        completed_financial_assessment: noitamrofni laicnanif ruoy derahs ev'uoY
+        name: emaN
+        reference_number: rebmun ecnerefeR
+        solicitors-actions: ".noitacilppa ruoy etelpmoc meht pleh ot dedivorp uoy
+          noitamrofni eht esu lliw roticilos ruoY"
+        what-happens-next: ".esac ruoy fo sliated eht dna noitautis laicnanif ruoy
+          dekcehc ev'ew ecno dia lagel rof yfilauq uoy fi mrifnoc ll'eW"
+    other_assets:
+      show:
+        h1-heading: "?evah uoy od stessa fo sepyt hcihW"
+        h2-heading: ylppa taht lla tceleS
+        none_selected: eseht fo enoN
+    outstanding_mortgages:
+      field_set_header: "?emoh ruoy no egagtrom gnidnatstuo eht si tahW"
+      hint: rednel ro redivorp egagtrom ruoy morf tnemetats eht kcehC
+      outstanding_mortgage_amount: tnuoma egagtrom gnidnatstuo eht retnE
+      show:
+        h1-heading: "?egagtrom gnidnatstuo eht si tahW"
+    own_homes:
+      show:
+        h1-heading: "?ni evil uoy taht emoh eht nwo uoy oD"
+    percentage_homes:
+      show:
+        h1-heading: "?nwo yllagel uoy od emoh ruoy fo erahs % tahW"
+    property_values:
+      form:
+        citizens:
+          property_values:
+            hint:
+              property_value: eulav detamitse eht dnif ot setisbew ytreporp esu nac
+                uoY
+            property_value: emoh ruoy fo eulav detamitse eht retnE
+        providers:
+          property_values:
+            hint:
+              property_value: eulav detamitse eht dnif ot setisbew ytreporp esu nac
+                uoY
+            property_value: emoh ruoy fo eulav detamitse eht retnE
+      show:
+        h1-heading: "?htrow emoh ruoy si hcum woH"
+    resend_link_requests:
+      show:
+        page_title: deripxe sah knil sihT
+        new_link_request: knil wen a tseuqeR
+      update:
+        page_title: tnes neeb sah knil wen a rof tseuqer ruoY
+        contact_provider: ".sutats noitacilppa ruoy kcehc ot roticilos ruoy htiw kaepS"
+    restrictions:
+      show:
+        h1-heading: "?stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp taht
+          snoitcirtser lagel yna ereht erA"
+        restrictions_details: yhw dna ,tsniaga worrob ro lles tonnac uoy stessa hcihw
+          su lleT
+        for_example: ":elpmaxe roF"
+        examples:
+          list: |2-
+
+            sgnideecorp lagel rehto ni etupsid fo tcejbus eht era stessa ruoy
+            dessessoper neeb sah emoh ruoy
+            tpurknab er'uoy
+    savings_and_investments:
+      accounts_summary:
+        col_account_number: rebmun tnuoccA
+        col_amount: tnuomA
+        col_sort_code: edoc troS
+        col_type: epyT
+        intro_text: ":stnuocca enilno gniwollof eht evah uoy su dlot ydaerla evah
+          uoY"
+      show:
+        h1-heading: "?evah uoy od stnemtsevni ro sgnivas fo sepyt tahW"
+        none_selected: eseht fo enoN
+    shared_ownerships:
+      show:
+        heading_1: "?esle enoyna htiw emoh ruoy nwo uoy oD"
+    student_finances:
+      show:
+        field_set_header: "?ecnanif tneduts teg uoy oD"
+        hint: ".yrasrub ro tnarg ,naol tneduts fo epyt yna sedulcni sihT"
+      annual_amounts:
+        show:
+          field_set_header: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum
+            woH"
+          hint: ".rettel tnemeltitne ecnanif tneduts ruoy kcehC"

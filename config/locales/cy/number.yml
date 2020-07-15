@@ -1,0 +1,6 @@
+---
+cy:
+  number:
+    currency:
+      format:
+        unit: "£"

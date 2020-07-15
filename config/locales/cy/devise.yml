@@ -1,0 +1,69 @@
+---
+cy:
+  devise:
+    confirmations:
+      confirmed: ".demrifnoc yllufsseccus neeb sah sserdda liame ruoY"
+      send_instructions: ".setunim wef a ni sserdda liame ruoy mrifnoc ot woh rof
+        snoitcurtsni htiw liame na eviecer lliw uoY"
+      send_paranoid_instructions: ".setunim wef a ni sserdda liame ruoy mrifnoc ot
+        woh rof snoitcurtsni htiw liame na eviecer lliw uoy ,esabatad ruo ni stsixe
+        sserdda liame ruoy fI"
+    failure:
+      already_authenticated: ".ni dengis ydaerla era uoY"
+      inactive: ".tey detavitca ton si tnuocca ruoY"
+      invalid: ".drowssap ro }syek_noitacitnehtua{% dilavnI"
+      last_attempt: ".dekcol si tnuocca ruoy erofeb tpmetta erom eno evah uoY"
+      locked: ".dekcol si tnuocca ruoY"
+      not_found_in_database: ".drowssap ro }syek_noitacitnehtua{% dilavnI"
+      timeout: ".eunitnoc ot niaga ni ngis esaelP .deripxe noisses ruoY"
+      unauthenticated: ".gniunitnoc erofeb pu ngis ro ni ngis ot deen uoY"
+      unconfirmed: ".gniunitnoc erofeb sserdda liame ruoy mrifnoc ot evah uoY"
+    mailer:
+      confirmation_instructions:
+        subject: snoitcurtsni noitamrifnoC
+      email_changed:
+        subject: degnahC liamE
+      password_change:
+        subject: degnahC drowssaP
+      reset_password_instructions:
+        subject: snoitcurtsni drowssap teseR
+      unlock_instructions:
+        subject: snoitcurtsni kcolnU
+    omniauth_callbacks:
+      failure: ."}nosaer{%" esuaceb }dnik{% morf uoy etacitnehtua ton dluoC
+      success: ".tnuocca }dnik{% morf detacitnehtua yllufsseccuS"
+    passwords:
+      no_token: ".dedivorp LRU lluf eht desu uoy erus ekam esaelp ,liame teser drowssap
+        a morf emoc od uoy fI .liame teser drowssap a morf gnimoc tuohtiw egap siht
+        ssecca t'nac uoY"
+      send_instructions: ".setunim wef a ni drowssap ruoy teser ot woh no snoitcurtsni
+        htiw liame na eviecer lliw uoY"
+      send_paranoid_instructions: ".setunim wef a ni sserdda liame ruoy ta knil yrevocer
+        drowssap a eviecer lliw uoy ,esabatad ruo ni stsixe sserdda liame ruoy fI"
+      updated: ".ni dengis won era uoY .yllufsseccus degnahc neeb sah drowssap ruoY"
+      updated_not_active: ".yllufsseccus degnahc neeb sah drowssap ruoY"
+    registrations:
+      destroyed: ".noos niaga uoy ees ot epoh eW .dellecnac yllufsseccus neeb sah
+        tnuocca ruoY !eyB"
+      signed_up: ".yllufsseccus pu dengis evah uoY !emocleW"
+      signed_up_but_inactive: ".detavitca tey ton si tnuocca ruoy esuaceb ni uoy ngis
+        ton dluoc ew ,revewoH .yllufsseccus pu dengis evah uoY"
+      signed_up_but_locked: ".dekcol si tnuocca ruoy esuaceb ni uoy ngis ton dluoc
+        ew ,revewoH .yllufsseccus pu dengis evah uoY"
+      signed_up_but_unconfirmed: ".tnuocca ruoy etavitca ot knil eht wollof esaelP
+        .sserdda liame ruoy ot tnes neeb sah knil noitamrifnoc a htiw egassem A"
+      update_needs_confirmation: ".sserdda liame wen ruoy mrifnoc ot knil mrifnoc
+        eht wollof dna liame ruoy kcehc esaelP .sserdda liame wen ruoy yfirev ot deen
+        ew tub ,yllufsseccus tnuocca ruoy detadpu uoY"
+      updated: ".yllufsseccus detadpu neeb sah tnuocca ruoY"
+    sessions:
+      already_signed_out: ".yllufsseccus tuo dengiS"
+      signed_in: ''
+      signed_out: ".yllufsseccus tuo dengiS"
+    unlocks:
+      send_instructions: ".setunim wef a ni tnuocca ruoy kcolnu ot woh rof snoitcurtsni
+        htiw liame na eviecer lliw uoY"
+      send_paranoid_instructions: ".setunim wef a ni ti kcolnu ot woh rof snoitcurtsni
+        htiw liame na eviecer lliw uoy ,stsixe tnuocca ruoy fI"
+      unlocked: ".eunitnoc ot ni ngis esaelP .yllufsseccus dekcolnu neeb sah tnuocca
+        ruoY"

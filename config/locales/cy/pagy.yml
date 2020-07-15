@@ -1,0 +1,14 @@
+---
+cy:
+  pagy:
+    info:
+      multiple_pages: "}eman_meti{% }tnuoc{% fo }ot{% - }morf{% gniwohS"
+      no_items: "}eman_meti{% oN"
+      single_page: "}eman_meti{% }tnuoc{% fo }tnuoc{% gniwohS"
+    item_name:
+      one: tluser
+      other: stluser
+    nav:
+      gap: ";pilleh&"
+      next: txeN
+      prev: suoiverP

@@ -1,0 +1,6 @@
+---
+cy:
+  currency:
+    eur: "€"
+    gbp: "£"
+    usd: "$"

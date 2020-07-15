@@ -1,11 +1,21 @@
 module Citizens
   class CitizenBaseController < FlowBaseController
     include ApplicationFromSession
+
+
+
     before_action :authenticate_applicant!
     before_action :check_not_complete
     before_action :set_cache_buster
 
+    around_action :switch_locale
+
     private
+
+    def switch_locale(&action)
+      locale = params[:locale] || I18n.default_locale
+      I18n.with_locale(locale, &action)
+    end
 
     class << self
       attr_reader :view_when_complete
@@ -26,3 +36,7 @@ module Citizens
     end
   end
 end
+
+
+
+
