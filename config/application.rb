@@ -10,15 +10,14 @@ module LaaApplyForLegalAid
     config.action_mailer.delivery_job = 'ActionMailer::MailDeliveryJob'
     # zeitwerk autoloader is causing errors so use classic
     config.autoloader = :classic
-
     config.time_zone = 'London'
-
-    Rails.application.routes.default_url_options[:locale] = I18n.locale
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
       g.test_framework :rspec
     end
+
+    Rails.application.routes.default_url_options[:locale] = I18n.locale
 
     config.i18n.default_locale = :en
     config.i18n.available_locales = [:en, :cy]
