@@ -4,6 +4,8 @@ module GovukElementsFormBuilder
     # https://guides.rubyonrails.org/configuring.html#configuring-action-view
     ActionView::Base.field_error_proc = proc { |html_tag| html_tag.html_safe }
 
+    CUSTOM_OPTIONS = %i[label input_prefix field_with_error hint title inline text_input input_attributes collection].freeze
+
     delegate :content_tag, to: :@template
     delegate :errors, to: :@object
 
@@ -30,10 +32,16 @@ module GovukElementsFormBuilder
     # Use :field_with_error to have the input be marked as erroneous when an other attribute has an error.
     # e.g., <%= form.govuk_text_field :address_line_two, field_with_error: :address_line_one %>
     #
-    %w[text_field file_field text_area].each do |text_input|
-      define_method("govuk_#{text_input}") do |attribute, options = {}|
-        input_helper.__send__(text_input, attribute, options)
-      end
+    def govuk_text_field(attribute, options = {})
+      InputField.html(attribute, 'text_field', options)
+    end
+
+    def govuk_file_field(attribute, options = {})
+      InputField.html(attribute, 'file_field', options)
+    end
+
+    def govuk_text_area(attribute, options = {})
+      InputField.html(attribute, 'text_area', options)
     end
 
     # Usage:
@@ -44,8 +52,7 @@ module GovukElementsFormBuilder
     # 'helpers.label.user.gender.f'
     #
     def govuk_radio_button(attribute, value, *args)
-      options = args.extract_options!.symbolize_keys!
-      radio_button_helper.html(attribute, value, options)
+      RadioButton.html(attribute, value, *args)
     end
 
     # Usage:
@@ -77,97 +84,26 @@ module GovukElementsFormBuilder
     # e.g., <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], inline: true) %>
     #
     def govuk_collection_radio_buttons(attribute, collection, *args)
-      options = args.extract_options!.symbolize_keys!
-      content_tag(:div, class: collection_radio_buttons_classes(attribute, options)) do
-        fieldset(attribute, options) do
-          classes = ['govuk-radios']
-          classes << (options[:inline] ? 'govuk-radios--inline' : 'govuk-!-padding-top-2')
-          concat_tags(
-            hint_helper.with_error_tags(attribute, options),
-            radio_button_collection(attribute, collection, options)
-          )
-        end
-      end
+      RadioButtonsCollection.html(attribute, collection, *args)
     end
 
     private
-
-    def hint_helper
-      @hint_helper ||= HintTag.new(self)
-    end
-
-    def input_helper
-      @input_helper ||= InputField.new(self, hint_helper)
-    end
-
-    def radio_button_helper
-      @radio_button_helper = RadioButton.new(self, hint_helper)
-    end
-
-    def radio_button_collection(attribute, collection, options)
-      content_tag(:div, class: classes.join(' ')) do
-        concat_tags(radio_buttons_input(attribute, collection, options))
-      end
-    end
-
-    def radio_buttons_input(attribute, collection, options)
-      value_attr, label_attr = extract_value_and_label_attributes(args)
-
-      collection.map do |obj|
-        value = value_attr ? obj[value_attr] : obj
-        label = label_attr ? obj[label_attr] : nil
-        input_attributes = options.dig(:input_attributes, value.to_s) || {}
-        radio_button_helper.html(attribute, value, options.merge(input_attributes).merge(label: label, collection: true))
-      end
-    end
 
     def concat_tags(*tags)
       tags.compact.join.html_safe
     end
 
-    def extract_value_and_label_attributes(args)
-      value_attr = args[0].is_a?(Hash) ? nil : args[0]
-      label_attr = args[1].is_a?(Hash) ? nil : args[1]
-      [value_attr, label_attr]
+    def hint_and_error_tags(attribute, options)
+      concat_tags(HintTag.tag(attribute, options), error_tag(attribute, options))
     end
 
-    def collection_radio_buttons_classes(attribute, options)
-      classes = ['govuk-form-group']
-      classes << 'govuk-form-group--error' if error?(attribute, options)
-      classes.join(' ')
-    end
+    def error_tag(attribute, options)
+      return unless error?(attribute, options)
 
-    def fieldset(attribute, options)
-      content_tag(:fieldset, class: 'govuk-fieldset', 'aria-describedby': aria_describedby(attribute, options)) do
-        legend_tag = options[:title] ? fieldset_legend(options[:title]) : nil
-        concat_tags(legend_tag, yield)
-      end
-    end
+      message = options[:error] || object.errors[attribute].first
+      return unless message.present?
 
-    def aria_describedby(attribute, options)
-      aria_describedby = []
-      aria_describedby << "#{attribute}-hint" if hint_helper.hint?(attribute, options)
-      aria_describedby << "#{attribute}-error" if error?(attribute, options)
-      return if aria_describedby.empty?
-
-      aria_describedby.join(' ')
-    end
-
-    # title param can either be:
-    # * a text string, e.g  "My title"
-    # * a hash, e.g { text: "My title", size: :m, htag: :h2 }
-    #
-    def fieldset_legend(title)
-      title = text_hash(title)
-      size = title.fetch(:size, 'xl')
-      htag = title.fetch(:htag, :h1)
-      content_tag(:legend, class: "govuk-fieldset__legend govuk-fieldset__legend--#{size}") do
-        content_tag(htag, title[:text], class: 'govuk-fieldset__heading')
-      end
-    end
-
-    def text_hash(text)
-      text.is_a?(Hash) ? text : { text: text }
+      content_tag(:span, message, class: 'govuk-error-message', id: "#{attribute}-error")
     end
 
     def error?(attribute, options)
