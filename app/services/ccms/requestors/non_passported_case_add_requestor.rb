@@ -21,11 +21,11 @@ module CCMS
       end
 
       def national_savings_present?
-        not_nil_or_zero? @legal_aid_application.savings_amount.national_savings
+        not_nil_or_zero? @legal_aid_application.savings_amount&.national_savings
       end
 
       def capital_share_present?
-        not_nil_or_zero? @legal_aid_application.savings_amount.plc_shares
+        not_nil_or_zero? @legal_aid_application.savings_amount&.plc_shares
       end
 
       def not_nil_or_zero?(value)
@@ -41,19 +41,19 @@ module CCMS
       end
 
       def applicant_has_access_to_other_person_account?
-        not_nil_or_zero? @legal_aid_application.savings_amount.other_person_account
+        not_nil_or_zero? @legal_aid_application.savings_amount&.other_person_account
       end
 
       def applicant_has_premium_bonds?
-        not_nil_or_zero? @legal_aid_application.savings_amount.national_savings
+        not_nil_or_zero? @legal_aid_application.savings_amount&.national_savings
       end
 
       def applicant_has_money_due?
-        not_nil_or_zero? @legal_aid_application.other_assets_declaration.money_owed_value
+        not_nil_or_zero? @legal_aid_application.other_assets_declaration&.money_owed_value
       end
 
       def applicant_has_capital_bonds?
-        not_nil_or_zero? @legal_aid_application.savings_amount.peps_unit_trusts_capital_bonds_gov_stocks
+        not_nil_or_zero? @legal_aid_application.savings_amount&.peps_unit_trusts_capital_bonds_gov_stocks
       end
 
       def add_property_instance_label
@@ -61,15 +61,15 @@ module CCMS
       end
 
       def applicant_has_second_home?
-        not_nil_or_zero? @legal_aid_application.other_assets_declaration.second_home_value
+        not_nil_or_zero? @legal_aid_application.other_assets_declaration&.second_home_value
       end
 
       def applicant_has_shares?
-        not_nil_or_zero? @legal_aid_application.savings_amount.plc_shares
+        not_nil_or_zero? @legal_aid_application.savings_amount&.plc_shares
       end
 
       def applicant_has_life_assurance?
-        not_nil_or_zero? @legal_aid_application.savings_amount.life_assurance_endowment_policy
+        not_nil_or_zero? @legal_aid_application.savings_amount&.life_assurance_endowment_policy
       end
 
       def applicant_owns_share_of_property?
@@ -79,11 +79,11 @@ module CCMS
       end
 
       def applicant_has_inherited_assets?
-        not_nil_or_zero? @legal_aid_application.other_assets_declaration.inherited_assets_value
+        not_nil_or_zero? @legal_aid_application.other_assets_declaration&.inherited_assets_value
       end
 
       def applicant_is_beneficiary_of_trust?
-        not_nil_or_zero? @legal_aid_application.other_assets_declaration.trust_value
+        not_nil_or_zero? @legal_aid_application.other_assets_declaration&.trust_value
       end
     end
   end
