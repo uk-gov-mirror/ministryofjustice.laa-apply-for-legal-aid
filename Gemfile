@@ -12,6 +12,7 @@ gem 'govuk_notify_rails', '~> 2.1.2'
 gem 'loofah', '>= 2.2.3'
 gem 'pg'
 gem 'puma', '~> 5.2'
+gem 'rack-attack' # prevent/reduce php phishing attacks
 gem 'rails', '~> 6.1.3'
 gem 'regexp-examples'
 gem 'savon', '~> 2.12.1'
