@@ -262,6 +262,11 @@ GEM
     geckoboard-ruby (0.4.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    govuk_app_config (2.10.0)
+      logstasher (>= 1.2.2, < 2.2.0)
+      sentry-raven (~> 3.1.1)
+      statsd-ruby (~> 1.5.0)
+      unicorn (>= 5.4, < 5.9)
     govuk_design_system_formbuilder (2.4.0)
       actionview (>= 5.2)
       activemodel (>= 5.2)
@@ -270,6 +275,13 @@ GEM
     govuk_notify_rails (2.1.2)
       notifications-ruby-client (~> 5.1)
       rails (>= 4.1.0)
+    govuk_publishing_components (24.8.0)
+      govuk_app_config
+      kramdown
+      plek
+      rails (>= 5.0.0.1)
+      rouge
+      sprockets (< 4)
     guard (2.16.2)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -346,12 +358,18 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
+    kgio (2.11.3)
+    kramdown (2.3.1)
+      rexml
     launchy (2.5.0)
       addressable (~> 2.7)
     libreconv (0.9.5)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    logstasher (2.1.5)
+      activesupport (>= 5.2)
+      request_store
     loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -417,6 +435,7 @@ GEM
       ast (~> 2.4.1)
     pg (1.2.3)
     pg_dump_anonymize (0.1.2)
+    plek (4.0.0)
     prometheus_exporter (0.4.17)
     protobuf-cucumber (3.10.8)
       activesupport (>= 3.2)
@@ -493,6 +512,7 @@ GEM
       rake (>= 0.8.7)
       thor (~> 1.0)
     rainbow (3.0.0)
+    raindrops (0.19.1)
     rake (13.0.3)
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
@@ -503,10 +523,13 @@ GEM
     regexp-examples (1.5.1)
     regexp_parser (1.8.2)
     remotipart (1.4.4)
+    request_store (1.5.0)
+      rack (>= 1.4)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
+    rouge (3.26.0)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
@@ -577,6 +600,8 @@ GEM
     sentry-rails (4.3.3)
       railties (>= 5.0)
       sentry-ruby-core (~> 4.3.0)
+    sentry-raven (3.1.2)
+      faraday (>= 1.0)
     sentry-ruby (4.3.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       faraday (>= 1.0)
@@ -619,6 +644,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    statsd-ruby (1.5.0)
     sys-uname (1.2.2)
       ffi (~> 1.1)
     temple (0.8.2)
@@ -632,6 +658,9 @@ GEM
     tzinfo-data (1.2021.1)
       tzinfo (>= 1.0.0)
     unicode-display_width (1.7.0)
+    unicorn (5.8.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     vcr (6.0.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -703,6 +732,7 @@ DEPENDENCIES
   geckoboard-ruby
   govuk_design_system_formbuilder
   govuk_notify_rails (~> 2.1.2)
+  govuk_publishing_components
   guard-cucumber
   guard-livereload
   guard-rspec

@@ -49,7 +49,14 @@
             <% end %>
             <td>
               <% unless application.summary_state == :submitted %>
-              <%= link_to_accessible(
+                <button class="govuk-button" data-toggle="modal" data-target="modal-default">Open modal</button>
+                <%= render "govuk_publishing_components/components/modal_dialogue", {
+                    id: "modal-default"
+                } do %>
+                  <h1 class="govuk-heading-l">Modal title</h1>
+                  <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet fringilla dictum. Morbi at vehicula augue. Pellentesque varius orci et augue pellentesque, sed elementum massa posuere. Curabitur egestas consectetur arcu, in porta lorem sagittis eu. Nulla facilisi. Sed scelerisque ligula lectus. Nulla et ligula a eros laoreet lacinia nec et ipsum. Ut sagittis sapien est, ut blandit risus laoreet at. Vestibulum vitae erat sed dolor ultricies efficitur.</p>
+                <% end %>
+              <%#= link_to_accessible(
                   t('.delete'),
                   providers_legal_aid_application_delete_path(application),
                   class: 'govuk-button govuk-button--secondary govuk-!-margin-bottom-0',

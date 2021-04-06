@@ -14,6 +14,11 @@
 @import 'govuk-mods';
 @import 'govuk-percent-input';
 @import 'govuk-prefix-input';
+// supporting govuk_publishing_components sass
+//@import 'govuk_publishing_components/govuk_frontend_support';
+//@import 'govuk_publishing_components/component_support';
+// component specific sass
+//@import 'govuk_publishing_components/components/modal-dialogue';
 @import 'govuk-secondary-button';
 @import 'helpers';
 @import 'interruption-panel';

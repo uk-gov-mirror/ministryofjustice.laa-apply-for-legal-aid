@@ -24,6 +24,8 @@ require("regenerator-runtime/runtime")
 
 require("axios")
 
+// require govuk_publishing_components/components/modal-dialogue
+
 const context = require.context("../src", true, /\.js$/)
 context.keys().forEach(key => context(key))
 
