@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_07_120727) do
+ActiveRecord::Schema.define(version: 2021_04_09_102038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -147,11 +147,11 @@ ActiveRecord::Schema.define(version: 2021_04_07_120727) do
   end
 
   create_table "attempts_to_settles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "legal_aid_application_id", null: false
     t.text "attempts_made"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["legal_aid_application_id"], name: "index_attempts_to_settles_on_legal_aid_application_id"
+    t.uuid "application_proceeding_type_id", null: false
+    t.index ["application_proceeding_type_id"], name: "index_attempts_to_settles_on_application_proceeding_type_id"
   end
 
   create_table "bank_account_holders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -772,7 +772,7 @@ ActiveRecord::Schema.define(version: 2021_04_07_120727) do
   add_foreign_key "addresses", "applicants"
   add_foreign_key "application_proceeding_types", "legal_aid_applications"
   add_foreign_key "application_proceeding_types", "proceeding_types"
-  add_foreign_key "attempts_to_settles", "legal_aid_applications"
+  add_foreign_key "attempts_to_settles", "application_proceeding_types"
   add_foreign_key "bank_account_holders", "bank_providers"
   add_foreign_key "bank_accounts", "bank_providers"
   add_foreign_key "bank_errors", "applicants"
