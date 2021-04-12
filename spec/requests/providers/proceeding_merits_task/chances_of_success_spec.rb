@@ -9,7 +9,7 @@ module Providers
 
       before { login }
 
-      describe 'GET /providers/applications/:id/chances_of_success' do
+      describe 'GET /providers/applications/:id/proceeding_merits_tasks/:application_proceeding_type_id/chances_of_success' do
         subject { get providers_legal_aid_application_chances_of_success_index_path(legal_aid_application) }
 
         it 'renders successfully' do
@@ -24,7 +24,7 @@ module Providers
         end
       end
 
-      describe 'POST /providers/applications/:legal_aid_application_id/vehicle' do
+      describe 'POST /providers/applications/:id/proceeding_merits_tasks/:application_proceeding_type_id/chances_of_success' do
         let(:success_prospect) { :poor }
         let(:chances_of_success) { create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details' }
         let(:success_likely) { 'true' }
