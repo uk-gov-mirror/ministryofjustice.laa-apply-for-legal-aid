@@ -41,6 +41,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: 'CFE::Submission', inverse_of: :legal_aid_application, dependent: :destroy
   has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission', inverse_of: :legal_aid_application
   has_many :scheduled_mailings, dependent: :destroy
+  has_many :involved_children, class_name: 'ApplicationMeritsTask::InvolvedChild', dependent: :destroy
   has_one :state_machine, class_name: 'BaseStateMachine', dependent: :destroy
 
   before_save :set_open_banking_consent_choice_at

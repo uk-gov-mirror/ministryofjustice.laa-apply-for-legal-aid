@@ -77,7 +77,13 @@ module Flow
         },
         capital_assessment_results: {
           path: ->(application) { urls.providers_legal_aid_application_capital_assessment_result_path(application) },
-          forward: :start_chances_of_successes
+          forward: ->(_) { Setting.allow_multiple_proceedings? ? :merits_task_list : :start_chances_of_successes }
+        },
+        merits_task_list: {
+          path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) }
+        },
+        involved_children: {
+          forward: :merits_task_list
         },
         client_completed_means: {
           path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },

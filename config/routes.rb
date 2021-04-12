@@ -181,6 +181,10 @@ Rails.application.routes.draw do
       resource :email_address, only: %i[show update]
       resource :application_confirmation, only: :show
       resource :percentage_home, only: %i[show update]
+      resource :merits_task_list, only: %i[show]
+      resources :proceeding_merits_tasks do
+        resource :involved_child, only: %i[show update], controller: 'proceeding_merits_task/involved_children'
+      end
       resource :vehicle, only: %i[show update]
       namespace :vehicles do
         resource :estimated_value, only: %i[show update]
