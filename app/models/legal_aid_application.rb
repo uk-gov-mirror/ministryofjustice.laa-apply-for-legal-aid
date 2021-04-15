@@ -140,6 +140,16 @@ class LegalAidApplication < ApplicationRecord
     ProceedingType.find(lead.proceeding_type_id)
   end
 
+  def application_proceedings_by_name
+    type_names = application_proceeding_types.map do |application_proceeding_type|
+      type = ProceedingType.find(application_proceeding_type.proceeding_type_id)
+      name = type.meaning
+      { name: name, attr_name: name.downcase.strip.gsub(/[^a-z ]/i, '').gsub(/\s+/, '_') }
+    end
+
+    type_names.sort_by { |type| type[:name] }
+  end
+
   def cfe_result
     most_recent_cfe_submission&.result
   end

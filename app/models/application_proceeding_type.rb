@@ -26,6 +26,8 @@ class ApplicationProceedingType < ApplicationRecord
            :default_delegated_functions_scope_limitation,
            to: :proceeding_type
 
+  scope :earliest_delegated_function_date, -> { order('used_delegated_functions_on ASC').limit(1).first.used_delegated_functions_on }
+
   before_create do
     self.proceeding_case_id = highest_proceeding_case_id + 1 if proceeding_case_id.blank?
     self.lead_proceeding = true if proceedings.empty?
