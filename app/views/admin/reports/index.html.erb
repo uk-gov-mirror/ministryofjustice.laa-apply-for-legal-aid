@@ -1,15 +1,16 @@
-<%= page_template(
-  page_title: t('.heading_1'),
-  column_width: :full,
-  back_link: :none
-  ) do %>
-
-  <%= form_with(
+<%= form_with(
         model: @reports_types_creator,
         url: admin_reports_path,
         method: :post,
         local: true
-      ) do |form| %>
+    ) do |form| %>
+
+  <%= page_template(
+    page_title: t('.heading_1'),
+    column_width: :full,
+    back_link: :none,
+    form: form
+    ) do %>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full">

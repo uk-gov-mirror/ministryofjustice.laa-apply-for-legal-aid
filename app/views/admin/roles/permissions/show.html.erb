@@ -1,15 +1,16 @@
-<%= page_template(
-  page_title: t('.heading_1', firm_name: @firm.name),
-  column_width: :full,
-  back_link: :none
-  ) do %>
+<%= form_with(
+        model: @firm,
+        url: admin_roles_permission_path,
+        method: :patch,
+        local: true
+    ) do |form| %>
 
-  <%= form_with(
-          model: @firm,
-          url: admin_roles_permission_path,
-          method: :patch,
-          local: true
-      ) do |form| %>
+    <%= page_template(
+      page_title: t('.heading_1', firm_name: @firm.name),
+      column_width: :full,
+      back_link: :none,
+      form: form,
+      ) do %>
 
     <div class="govuk-!-margin-top-0govuk-!-padding-bottom-2">
       <fieldset class="govuk-fieldset">
