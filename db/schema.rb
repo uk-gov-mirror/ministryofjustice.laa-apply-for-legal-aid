@@ -125,8 +125,8 @@ ActiveRecord::Schema.define(version: 2021_04_15_094249) do
     t.uuid "application_proceeding_type_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["application_proceeding_type_id", "involved_child_id"], name: "index_application_proceeding_involved_child"
-    t.index ["involved_child_id", "application_proceeding_type_id"], name: "index_involved_child_application_proceeding"
+    t.index ["application_proceeding_type_id", "involved_child_id"], name: "index_application_proceeding_involved_children"
+    t.index ["involved_child_id", "application_proceeding_type_id"], name: "index_involved_children_application_proceeding"
   end
 
   create_table "application_proceeding_types_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -412,8 +412,6 @@ ActiveRecord::Schema.define(version: 2021_04_15_094249) do
     t.date "date_of_birth"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "application_proceeding_type_id"
-    t.index ["application_proceeding_type_id"], name: "index_involved_children_on_application_proceeding_type_id"
     t.index ["legal_aid_application_id"], name: "index_involved_children_on_legal_aid_application_id"
   end
 

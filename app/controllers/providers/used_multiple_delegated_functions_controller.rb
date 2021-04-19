@@ -7,21 +7,21 @@ module Providers
     end
 
     def update
-      form.update(form_params)
+      return continue_or_draft if draft_selected?
 
-      render :show unless save_continue_or_draft_and_update_scope_limitations
+      render :show unless save_continue_and_update_scope_limitations
     end
 
     private
 
-    def save_continue_or_draft_and_update_scope_limitations
-      return false unless save_continue_or_draft(@form)
+    def save_continue_and_update_scope_limitations
+      return false unless form.save(form_params)
 
-      @form.used_delegated_functions? ? add_delegated_scope_limitations : remove_delegated_scope_limitations
+      form.used_delegated_functions? ? add_delegated_scope_limitations : remove_delegated_scope_limitations
 
-      submit_application_reminder if @form&.used_delegated_functions_on && @form.used_delegated_functions_on >= 1.month.ago
+      submit_application_reminder if form.earliest_delegated_functions_date && form.earliest_delegated_functions_date >= 1.month.ago
 
-      true
+      go_forward
     end
 
     def submit_application_reminder
@@ -50,12 +50,13 @@ module Providers
     end
 
     def form
-      @form ||= LegalAidApplications::UsedMultipleDelegatedFunctionsForm.call(legal_aid_application)
+      @form ||= LegalAidApplications::UsedMultipleDelegatedFunctionsForm.call(application_proceeding_types)
     end
 
     def form_params
       merged_params = merge_with_model(form) do
         params.require(:legal_aid_applications_used_multiple_delegated_functions_form)
+              .except(:delegated_functions)
       end
       convert_date_params(merged_params)
     end
