@@ -100,10 +100,17 @@ module LegalAidApplications
         name = proceeding_name[:name]
         next unless checkbox_for? name
 
-        add_date_in_range_error(name) unless !valid_date?(name) || delegated_functions_date(name) >= Date.current.ago(12.months)
-        add_date_invalid(name) unless valid_date?(name)
-        add_date_in_future(name) unless !valid_date?(name) || delegated_functions_date(name) <= Date.current
+        validate_proceeding_date(name)
       end
+    end
+
+    def validate_proceeding_date(name)
+      date = delegated_functions_date(name)
+      valid = date != :invalid_date
+
+      add_date_invalid(name) unless valid
+      add_date_in_range_error(name) unless !valid || date >= Date.current.ago(12.months)
+      add_date_in_future(name) unless !valid || date <= Date.current
     end
 
     def add_date_in_future(name)
@@ -129,10 +136,6 @@ module LegalAidApplications
 
     def checkbox_for?(category)
       __send__("check_box_#{category}") == 'true'
-    end
-
-    def valid_date?(name)
-      delegated_functions_date(name) != :invalid_date
     end
 
     def delegated_functions_date(name)
