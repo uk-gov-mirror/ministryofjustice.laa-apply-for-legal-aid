@@ -21,6 +21,7 @@ module Providers
 
       submit_application_reminder if form.earliest_delegated_functions_date && form.earliest_delegated_functions_date >= 1.month.ago
 
+      update_substantive_application_deadline
       # TODO pass earliest reported date to the flow to decide if earliest DF date needs to be confirmed or not
       # go_forward(form.earliest_delegated_functions_reported_date)
       go_forward
@@ -52,7 +53,15 @@ module Providers
     end
 
     def form
-      @form ||= LegalAidApplications::UsedMultipleDelegatedFunctionsForm.call(legal_aid_application)
+      @form ||= LegalAidApplications::UsedMultipleDelegatedFunctionsForm.call(application_proceeding_types, application_proceedings_by_name)
+    end
+
+    def application_proceeding_types
+      @application_proceeding_types ||= legal_aid_application.application_proceeding_types
+    end
+
+    def application_proceedings_by_name
+      @application_proceedings_by_name ||= legal_aid_application.application_proceedings_by_name
     end
 
     def form_params
@@ -61,6 +70,17 @@ module Providers
               .except(:delegated_functions)
       end
       convert_date_params(merged_params)
+    end
+
+    def substantive_application_deadline
+      return unless form.earliest_delegated_functions_date && form.earliest_delegated_functions_date != :invalid
+
+      SubstantiveApplicationDeadlineCalculator.call legal_aid_application
+    end
+
+    def update_substantive_application_deadline
+      legal_aid_application.substantive_application_deadline_on = substantive_application_deadline
+      legal_aid_application.save!
     end
   end
 end
