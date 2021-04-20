@@ -7,12 +7,13 @@ RSpec.describe LegalAidApplications::CalculationDateService do
   let(:chances_of_success) { create :chances_of_success, submitted_at: merits_submitted_at }
   let(:applicant_receives_benefit) { Faker::Boolean.boolean }
   let(:benefit_check_result) { create :benefit_check_result, result: applicant_receives_benefit ? 'yes' : 'no' }
+  let(:application_proceeding_type) { create :application_proceeding_type, chances_of_success: chances_of_success }
   let(:legal_aid_application) do
     create :legal_aid_application,
            used_delegated_functions_on: used_delegated_functions_on,
            used_delegated_functions: used_delegated_functions,
            transaction_period_finish_on: transaction_period_finish_on,
-           chances_of_success: chances_of_success,
+           application_proceeding_types: [application_proceeding_type],
            benefit_check_result: benefit_check_result
   end
 

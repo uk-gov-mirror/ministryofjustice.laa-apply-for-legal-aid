@@ -216,6 +216,7 @@ FactoryBot.define do
           default_df_sl = pt.default_delegated_functions_scope_limitation || create(:scope_limitation, :delegated_functions, joined_proceeding_type: pt)
           apt.application_proceeding_types_scope_limitations << AssignedSubstantiveScopeLimitation.new(scope_limitation: default_subst_sl)
           apt.application_proceeding_types_scope_limitations << AssignedDfScopeLimitation.new(scope_limitation: default_df_sl)
+          create(:chances_of_success, :with_optional_text, application_proceeding_type: apt, submitted_at: Time.zone.today)
         end
       end
     end
@@ -380,18 +381,6 @@ FactoryBot.define do
       other_assets_declaration { build :other_assets_declaration, :all_nil }
     end
 
-    trait :with_chances_of_success do
-      after(:create) do |application|
-        create(:chances_of_success, :with_optional_text, legal_aid_application: application)
-      end
-    end
-
-    trait :with_chances_of_success_submitted_today do
-      after(:create) do |application|
-        create(:chances_of_success, :with_optional_text, submitted_at: Time.zone.today, legal_aid_application: application)
-      end
-    end
-
     trait :with_merits_statement_of_case do
       after(:create) do |application|
         create(:statement_of_case, legal_aid_application: application)
@@ -437,7 +426,6 @@ FactoryBot.define do
       outstanding_mortgage_amount { rand(1...1_000_000.0).round(2) }
       shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
       percentage_home { rand(1...99.0).round(2) }
-      with_chances_of_success
       with_merits_statement_of_case
       with_opponent
       with_restrictions
@@ -461,7 +449,6 @@ FactoryBot.define do
       outstanding_mortgage_amount { rand(1...1_000_000.0).round(2) }
       shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
       percentage_home { rand(1...99.0).round(2) }
-      with_chances_of_success
       with_merits_statement_of_case
       with_opponent
       with_restrictions
@@ -580,7 +567,6 @@ FactoryBot.define do
 
     trait :at_checking_merits_answers do
       with_proceeding_types
-      with_chances_of_success
       with_merits_statement_of_case
 
       before(:create) do |application|

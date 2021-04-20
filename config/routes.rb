@@ -205,8 +205,6 @@ Rails.application.routes.draw do
       resource :opponent_name, only: %i[show update]
       resource :date_client_told_incident, only: %i[show update], controller: 'application_merits_task/date_client_told_incidents'
       resource :proceedings_before_the_court, only: %i[show update]
-      resources :chances_of_success, only: %i[index create], controller: 'proceeding_merits_task/chances_of_success'
-      resource :success_prospects, only: %i[show update]
       resource :check_merits_answers, only: [:show] do
         patch :continue
         patch :reset
@@ -244,6 +242,11 @@ Rails.application.routes.draw do
       resource :check_client_details, only: %i[show update]
       resource :received_benefit_confirmation, only: %i[show update]
       resource :has_evidence_of_benefit, only: %i[show update]
+    end
+
+    resources :application_proceeding_types, path: 'application_proceeding_types', only: %i[] do
+      resources :chances_of_success, only: %i[index create], controller: 'proceeding_merits_task/chances_of_success'
+      resource :success_prospects, only: %i[show update], controller: 'proceeding_merits_task/success_prospects'
     end
   end
 

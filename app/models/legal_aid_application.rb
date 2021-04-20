@@ -19,7 +19,6 @@ class LegalAidApplication < ApplicationRecord
   has_one :benefit_check_result, dependent: :destroy
   has_one :other_assets_declaration, dependent: :destroy
   has_one :savings_amount, dependent: :destroy
-  has_one :chances_of_success, class_name: 'ProceedingMeritsTask::ChancesOfSuccess', dependent: :destroy
   has_one :statement_of_case, class_name: 'ApplicationMeritsTask::StatementOfCase', dependent: :destroy
   has_one :opponent, class_name: 'ApplicationMeritsTask::Opponent', dependent: :destroy
   has_one :latest_incident, -> { order(occurred_on: :desc) }, class_name: 'ApplicationMeritsTask::Incident', inverse_of: :legal_aid_application, dependent: :destroy
@@ -136,8 +135,11 @@ class LegalAidApplication < ApplicationRecord
   # at which time this method should be changed to determine which is the lead one and return that.
   #
   def lead_proceeding_type
-    lead = application_proceeding_types.find_by(lead_proceeding: true)
-    ProceedingType.find(lead.proceeding_type_id)
+    ProceedingType.find(lead_application_proceeding_type.proceeding_type_id)
+  end
+
+  def lead_application_proceeding_type
+    application_proceeding_types.find_by(lead_proceeding: true)
   end
 
   def cfe_result
@@ -390,6 +392,10 @@ class LegalAidApplication < ApplicationRecord
 
   def complete_non_passported_means!
     state_machine_proxy.complete_non_passported_means!(self)
+  end
+
+  def chances_of_success
+    lead_application_proceeding_type.chances_of_success
   end
 
   def summary_state

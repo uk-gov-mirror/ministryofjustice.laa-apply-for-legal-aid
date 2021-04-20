@@ -261,7 +261,10 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe '#summary_state' do
     let(:chances_of_success) { nil }
-    subject(:legal_aid_application) { create :legal_aid_application, chances_of_success: chances_of_success }
+    let(:application_proceeding_type) { create :application_proceeding_type, chances_of_success: chances_of_success }
+    subject(:legal_aid_application) do
+      create :legal_aid_application, application_proceeding_types: [application_proceeding_type]
+    end
 
     it 'returns :in_progress summary state' do
       expect(legal_aid_application.summary_state).to eq(:in_progress)

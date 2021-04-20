@@ -20,12 +20,14 @@ module Reports
                opponent: opponent,
                proceeding_types: proceeding_types,
                ccms_submission: ccms_submission,
-               chances_of_success: chances_of_success,
+               application_proceeding_types: [application_proceeding_type],
                used_delegated_functions: used_delegated_functions,
                used_delegated_functions_on: used_delegated_functions_on,
                used_delegated_functions_reported_on: used_delegated_functions_reported_on,
                own_vehicle: false
       end
+
+      let(:application_proceeding_type) { create :application_proceeding_type, chances_of_success: chances_of_success }
 
       let(:applicant) do
         create :applicant,

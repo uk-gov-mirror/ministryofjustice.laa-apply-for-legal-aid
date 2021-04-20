@@ -76,7 +76,10 @@ module Dashboard
       end
 
       def self.submitted_applications_on(date)
-        LegalAidApplication.joins(:chances_of_success).where('DATE(submitted_at) = ?', date)
+        
+        binding.pry
+        
+        ProceedingMeritsTask::ChancesOfSuccess.all.where('DATE(submitted_at) = ?', date).map(&:application_proceeding_type)
       end
 
       private_class_method :submitted_applications_on

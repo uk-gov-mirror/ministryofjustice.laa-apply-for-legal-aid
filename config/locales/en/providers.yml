@@ -254,6 +254,9 @@ en:
       chances_of_success:
         index:
           h1-heading: Is the chance of a successful outcome 50% or better?
+      success_prospects:
+        show:
+          h1-heading: What is the chance of a successful outcome?
     application_merits_task:
       date_client_told_incidents:
         show:
@@ -714,9 +717,6 @@ en:
           You can make a substantive application now or come back and do it later.
         no_start_later: No, I'll do it later
         must_submit_by: You must submit a substantive application by %{deadline}
-    success_prospects:
-      show:
-        h1-heading: What is the chance of a successful outcome?
     transactions:
       disregarded_list:
         disregarded_list: Benefits disregarded from the financial eligibility calculation

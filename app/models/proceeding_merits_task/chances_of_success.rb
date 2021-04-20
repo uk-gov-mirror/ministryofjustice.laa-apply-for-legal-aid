@@ -1,6 +1,6 @@
 module ProceedingMeritsTask
   class ChancesOfSuccess < ApplicationRecord
-    belongs_to :legal_aid_application
+    belongs_to :application_proceeding_type
 
     PRETTY_SUCCESS_PROSPECTS = {
       likely: 'Likely (>50%)',

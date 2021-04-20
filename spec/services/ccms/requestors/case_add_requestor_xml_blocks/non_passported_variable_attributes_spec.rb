@@ -37,7 +37,9 @@ module CCMS
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
-        let(:chances_of_success) { legal_aid_application.chances_of_success }
+        let!(:chances_of_success) do
+          create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type
+        end
         let(:applicant) { legal_aid_application.applicant }
         let(:percentage_home) { rand(1...99.0).round(2) }
 
