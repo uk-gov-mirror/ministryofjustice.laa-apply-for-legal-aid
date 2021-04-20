@@ -17,7 +17,7 @@ module Providers
     def save_continue_and_update_scope_limitations
       return false unless form.save(form_params)
 
-      form.used_delegated_functions? ? add_delegated_scope_limitations : remove_delegated_scope_limitations
+      form.earliest_delegated_functions_date ? add_delegated_scope_limitations : remove_delegated_scope_limitations
 
       submit_application_reminder if form.earliest_delegated_functions_date && form.earliest_delegated_functions_date >= 1.month.ago
 
