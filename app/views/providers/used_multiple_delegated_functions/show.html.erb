@@ -21,7 +21,7 @@
       <% end %>
 
       <%= form.govuk_radio_divider %>
-      <%= form.govuk_check_box :none_selected, true, '', multiple: false, label: {text: t('.none_selected')} %>
+      <%= form.govuk_check_box 'check_box_none_selected', true, '', multiple: false, label: {text: t('.none_selected')} %>
     <% end %>
 
     <%= next_action_buttons(

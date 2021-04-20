@@ -9,6 +9,8 @@ module LegalAidApplications
     #           :used_delegated_functions_reported_on,
     #           presence: { unless: :date_not_required? }
 
+    validate :delegated_functions_dates
+
     attr_accessor :application_proceeding_types,
                   :application_proceeding_names,
                   :none_selected
@@ -81,6 +83,14 @@ module LegalAidApplications
 
         type.update(used_delegated_functions_on: delegated_functions_date)
         type.update(used_delegated_functions_reported_on: delegated_functions_reported_date(delegated_functions_date))
+      end
+    end
+
+    def delegated_functions_dates
+      return if checkbox_for? :none_selected
+
+      application_proceeding_names.each do |name|
+        next unless checkbox_for? name
       end
     end
 
