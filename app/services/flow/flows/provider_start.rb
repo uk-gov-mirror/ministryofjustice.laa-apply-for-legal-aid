@@ -53,8 +53,10 @@ module Flow
         },
         used_multiple_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_multiple_delegated_functions_path(application) },
-          forward: ->(application) do
-            application.used_delegated_functions_on&.between?(12.months.ago - 1.day, 1.month.ago) ? :delegated_functions_dates : :limitations
+          forward: ->(_earliest_reported_date) do
+            # TODO if earliest reported date does not exist then go to the 'confirm earliest DF date' page as this is outside a month
+            # earliest_reported_date ? :limitations : :delegated_functions_dates
+            :limitations
           end
         },
         used_delegated_functions: {

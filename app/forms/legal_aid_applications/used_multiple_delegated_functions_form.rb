@@ -9,7 +9,9 @@ module LegalAidApplications
     #           :used_delegated_functions_reported_on,
     #           presence: { unless: :date_not_required? }
 
-    attr_accessor :application_proceeding_types,
+    after_validation :update_substantive_application_deadline
+
+    attr_accessor :legal_aid_application_id,
                   :none_selected
 
     class << self
@@ -17,9 +19,9 @@ module LegalAidApplications
         ProceedingType.find(type.proceeding_type_id).meaning.downcase.strip.gsub(/[^a-z ]/i, '').gsub(/\s+/, '_')
       end
 
-      def call(application_proceeding_types)
+      def call(legal_aid_application)
 
-        application_proceeding_types.each do |proceeding_type|
+        legal_aid_application.application_proceeding_types.each do |proceeding_type|
           name = proceeding_type_name(proceeding_type)
           attr_accessor :"check_box_#{name}",
                         :"#{name}_used_delegated_functions_on_1i",
@@ -29,10 +31,9 @@ module LegalAidApplications
         end
 
         model = new
+        model.__send__('legal_aid_application_id=', legal_aid_application.id)
 
-        model.__send__('application_proceeding_types=', application_proceeding_types)
-
-        application_proceeding_types.each do |proceeding_type|
+        legal_aid_application.application_proceeding_types.each do |proceeding_type|
           name = proceeding_type_name(proceeding_type)
           populate_attribute(model, name, proceeding_type.used_delegated_functions_on)
         end
@@ -57,6 +58,7 @@ module LegalAidApplications
       return false unless valid?
 
       save_proceeding_records
+      true
     end
 
     def update_proceeding_attributes(params)
@@ -76,6 +78,13 @@ module LegalAidApplications
           type.update(used_delegated_functions_reported_on: nil)
         end
       end
+
+      # TODO remove once backend changed and columns removed from model
+      legal_aid_application.used_delegated_functions = used_delegated_functions_selected?
+      legal_aid_application.used_delegated_functions_on = earliest_delegated_functions_date
+      legal_aid_application.used_delegated_functions_reported_on = earliest_delegated_functions_reported_date
+      update_substantive_application_deadline
+      legal_aid_application.save!
     end
 
     def used_delegated_functions?
@@ -83,10 +92,30 @@ module LegalAidApplications
     end
 
     def earliest_delegated_functions_date
-      @earliest_delegated_functions_date ||= application_proceeding_types.earliest_delegated_function_date
+      @earliest_delegated_functions_date ||= application_proceeding_types.earliest_delegated_function_date if used_delegated_functions?
+    end
+
+    def earliest_delegated_functions_reported_date
+      @earliest_delegated_functions_reported_date ||= Time.zone.today unless !earliest_delegated_functions_date || earliest_date_over_a_month_ago?
     end
 
     private
+
+    def used_delegated_functions_selected?
+      ActiveModel::Type::Boolean.new.cast(earliest_delegated_functions_date)
+    end
+
+    def earliest_date_over_a_month_ago?
+      earliest_delegated_functions_date.before?(Time.zone.today - 1.month + 1.day)
+    end
+
+    def legal_aid_application
+      @legal_aid_application ||= LegalAidApplication.find(legal_aid_application_id)
+    end
+
+    def application_proceeding_types
+      @application_proceeding_types ||= legal_aid_application.application_proceeding_types
+    end
 
     def proceeding_type_name(type)
       ProceedingType.find(type.proceeding_type_id).meaning.downcase.strip.gsub(/[^a-z ]/i, '').gsub(/\s+/, '_')
@@ -120,14 +149,14 @@ module LegalAidApplications
       errors.add(:used_delegated_functions, I18n.t(translation_path, months: Time.zone.now.ago(12.months).strftime('%d %m %Y')))
     end
 
-    # def substantive_application_deadline
-    #   return unless used_delegated_functions_on && used_delegated_functions_on != :invalid
-    #
-    #   SubstantiveApplicationDeadlineCalculator.call self
-    # end
-    #
-    # def update_substantive_application_deadline
-    #   model.substantive_application_deadline_on = substantive_application_deadline
-    # end
+    def substantive_application_deadline
+      return unless used_delegated_functions_on && used_delegated_functions_on != :invalid
+
+      SubstantiveApplicationDeadlineCalculator.call legal_aid_application
+    end
+
+    def update_substantive_application_deadline
+      legal_aid_application.substantive_application_deadline_on = substantive_application_deadline
+    end
   end
 end

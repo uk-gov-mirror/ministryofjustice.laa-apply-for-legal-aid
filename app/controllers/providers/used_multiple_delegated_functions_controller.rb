@@ -21,6 +21,8 @@ module Providers
 
       submit_application_reminder if form.earliest_delegated_functions_date && form.earliest_delegated_functions_date >= 1.month.ago
 
+      # TODO pass earliest reported date to the flow to decide if earliest DF date needs to be confirmed or not
+      # go_forward(form.earliest_delegated_functions_reported_date)
       go_forward
     end
 
@@ -50,7 +52,7 @@ module Providers
     end
 
     def form
-      @form ||= LegalAidApplications::UsedMultipleDelegatedFunctionsForm.call(application_proceeding_types)
+      @form ||= LegalAidApplications::UsedMultipleDelegatedFunctionsForm.call(legal_aid_application)
     end
 
     def form_params
