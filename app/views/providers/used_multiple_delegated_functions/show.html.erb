@@ -9,17 +9,18 @@
     <%= form.govuk_check_boxes_fieldset :delegated_functions, legend: {size: 'xl', tag: 'h1', text: page_title} do %>
       <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
 
-      <% @application_proceedings_by_name.each do |proceeding_name| %>
-        <% check_box_name = "check_box_#{proceeding_name[:name]}"
-           @form.__send__("#{check_box_name}=", @form.send(check_box_name).present?) %>
+      <div class="deselect-group govuk-!-padding-bottom-1" data-deselect-ctrl="#legal-aid-applications-used-multiple-delegated-functions-form-check-box-none-selected-true-field">
+        <% @application_proceedings_by_name.each do |proceeding_name| %>
+          <% check_box_name = "check_box_#{proceeding_name[:name]}"
+             @form.__send__("#{check_box_name}=", @form.send(check_box_name).present?) %>
 
-        <%= form.govuk_check_box check_box_name, true, '', multiple: false, link_errors: true, label: {text: t(".#{proceeding_name[:name]}")} do %>
-          <%= form.govuk_date_field :"#{proceeding_name[:name]}_used_delegated_functions_on",
-                                    legend: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_label"), class: 'govuk-label govuk-date-input__label' },
-                                    hint: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_hint", options: number_of_days_ago(5))} %>
+          <%= form.govuk_check_box check_box_name, true, '', multiple: false, link_errors: true, label: {text: t(".#{proceeding_name[:name]}")} do %>
+            <%= form.govuk_date_field :"#{proceeding_name[:name]}_used_delegated_functions_on",
+                                      legend: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_label"), class: 'govuk-label govuk-date-input__label' },
+                                      hint: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_hint", options: number_of_days_ago(5))} %>
+          <% end %>
         <% end %>
-      <% end %>
-
+      </div>
       <%= form.govuk_radio_divider %>
       <%= form.govuk_check_box 'check_box_none_selected', true, '', multiple: false, label: {text: t('.none_selected')} %>
     <% end %>

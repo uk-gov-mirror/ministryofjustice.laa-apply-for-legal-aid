@@ -9,11 +9,12 @@ module LegalAidApplications
     #           :used_delegated_functions_reported_on,
     #           presence: { unless: :date_not_required? }
 
-    validate :delegated_functions_dates
+    validate :validate_dates,
+             :nothing_selected
 
     attr_accessor :application_proceeding_types,
                   :application_proceeding_names,
-                  :none_selected
+                  :check_box_none_selected
 
     class << self
       def call(proceeding_types, proceeding_names)
@@ -44,7 +45,7 @@ module LegalAidApplications
           proceeding_name = model.application_proceeding_names.detect { |name| name[:id] == type.proceeding_type_id }[:name]
           model.__send__("check_box_#{proceeding_name}=", 'true')
           model.__send__("#{proceeding_name}_used_delegated_functions_on=", date)
-          model.__send__('none_selected=', false)
+          model.__send__('check_box_none_selected=', false)
         end
       end
     end
@@ -86,12 +87,40 @@ module LegalAidApplications
       end
     end
 
-    def delegated_functions_dates
+    def nothing_selected
+      return if checkbox_for?(:none_selected) || application_proceeding_names.any? { |type| checkbox_for? type[:name] }
+
+      errors.add(:delegated_functions, I18n.t("#{error_base_path}.nothing_selected"))
+    end
+
+    def validate_dates
       return if checkbox_for? :none_selected
 
-      application_proceeding_names.each do |name|
+      application_proceeding_names.each do |proceeding_name|
+        name = proceeding_name[:name]
         next unless checkbox_for? name
+
+        add_date_in_range_error(name) unless !valid_date?(name) || delegated_functions_date(name) >= Date.current.ago(12.months)
+        add_date_invalid(name) unless valid_date?(name)
+        add_date_in_future(name) unless !valid_date?(name) || delegated_functions_date(name) <= Date.current
       end
+    end
+
+    def add_date_in_future(name)
+      errors.add("#{name}_used_delegated_functions_on", I18n.t("#{error_base_path}.date_is_in_the_future"))
+    end
+
+    def add_date_invalid(name)
+      errors.add("#{name}_used_delegated_functions_on", I18n.t("#{error_base_path}.date_invalid"))
+    end
+
+    def add_date_in_range_error(name)
+      translation_path = "#{error_base_path}.date_not_in_range"
+      errors.add("#{name}_used_delegated_functions_on", I18n.t(translation_path, months: Time.zone.now.ago(12.months).strftime('%d %m %Y')))
+    end
+
+    def error_base_path
+      'activemodel.errors.models.application_proceeding_types.attributes.used_delegated_functions_on'
     end
 
     def earliest_delegated_functions
@@ -102,8 +131,14 @@ module LegalAidApplications
       __send__("check_box_#{category}") == 'true'
     end
 
+    def valid_date?(name)
+      delegated_functions_date(name) != :invalid_date
+    end
+
     def delegated_functions_date(name)
       Date.parse("#{__send__("#{name}_used_delegated_functions_on_1i")}-#{__send__("#{name}_used_delegated_functions_on_2i")}-#{__send__("#{name}_used_delegated_functions_on_3i")}")
+    rescue ArgumentError
+      :invalid_date
     end
 
     def delegated_functions_reported_date(date)
@@ -112,22 +147,6 @@ module LegalAidApplications
 
     def date_over_a_month_ago?(date)
       date.before?(Time.zone.today - 1.month + 1.day)
-    end
-
-    def date_in_range?
-      return if date_not_required? || !datetime?(earliest_delegated_functions_date)
-      return true if Time.zone.parse(earliest_delegated_functions_date.to_s) >= Date.current.ago(12.months)
-
-      add_date_in_range_error
-    end
-
-    def datetime?(value)
-      value.methods.include? :strftime
-    end
-
-    def add_date_in_range_error
-      translation_path = 'activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.date_not_in_range'
-      errors.add(:used_delegated_functions, I18n.t(translation_path, months: Time.zone.now.ago(12.months).strftime('%d %m %Y')))
     end
   end
 end
