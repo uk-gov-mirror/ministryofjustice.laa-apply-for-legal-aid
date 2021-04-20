@@ -2,13 +2,6 @@ module LegalAidApplications
   class UsedMultipleDelegatedFunctionsForm
     include ActiveModel::Model
 
-    # validate :date_in_range
-    # validates :used_delegated_functions, presence: { unless: :draft? }
-    # validates :used_delegated_functions_on, date: { not_in_the_future: true }, allow_nil: true
-    # validates :used_delegated_functions_on,
-    #           :used_delegated_functions_reported_on,
-    #           presence: { unless: :date_not_required? }
-
     validate :validate_dates,
              :nothing_selected
 
