@@ -12,11 +12,7 @@ module LegalAidApplications
     class << self
       def call(proceeding_types, proceeding_names)
         populate_attr_accessors(proceeding_names)
-        model = new
-        model.__send__('application_proceeding_types=', proceeding_types)
-        model.__send__('application_proceeding_names=', proceeding_names)
-        populate_model_attributes(model)
-        model
+        new({ application_proceeding_types: proceeding_types, application_proceeding_names: proceeding_names })
       end
 
       def populate_attr_accessors(proceeding_names)
@@ -29,17 +25,17 @@ module LegalAidApplications
                         :"#{name}_used_delegated_functions_on"
         end
       end
+    end
 
-      def populate_model_attributes(model)
-        model.application_proceeding_types.each do |type|
-          date = type.used_delegated_functions_on
-          next unless date
+    def initialize(*args)
+      super
+      application_proceeding_types.each do |type|
+        date = type.used_delegated_functions_on
+        next unless date
 
-          proceeding_name = model.application_proceeding_names.detect { |name| name[:id] == type.proceeding_type_id }[:name]
-          model.__send__("check_box_#{proceeding_name}=", 'true')
-          model.__send__("#{proceeding_name}_used_delegated_functions_on=", date)
-          model.__send__('check_box_none_selected=', false)
-        end
+        proceeding_name = application_proceeding_names.detect { |name| name[:id] == type.proceeding_type_id }[:name]
+        __send__("check_box_#{proceeding_name}=", 'true')
+        __send__("#{proceeding_name}_used_delegated_functions_on=", date)
       end
     end
 
@@ -59,8 +55,7 @@ module LegalAidApplications
       earliest_delegated_functions&.used_delegated_functions_reported_on
     end
 
-    private_class_method :populate_attr_accessors,
-                         :populate_model_attributes
+    private_class_method :populate_attr_accessors
 
     private
 
